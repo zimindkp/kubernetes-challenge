@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kubechallenge-kishan
+  labels:
+    app: kube-challenge
+spec:
+  replicas: 1     # number of Pods, set this as 1; *use StatefulSet for Databases
+  selector:
+    matchLabels: # this is how K8s identifies which Pods to match with this Deployment
+      app: kube-challenge
+  template:     # template is a configuration of the Pod within the Deployment
+    metadata:
+      labels:
+        app: kube-challenge  # the label below is an arbitrary key-value pair used to match the containers e.g. in service
+    spec:
+      containers:     # list of containers in each Pod
+        - name: kishan-kube-challenge   # specify name
+          image: kishan-kubechallenge-img        # specify image to use
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000     # determines the port that Service will forward to i.e.the one container will listen on
+          env:
+            - name: NAME  # this is environment variable in the server.js file
+              valueFrom:    # reference the value from ConfigMap
+                configMapKeyRef:
+                  name: kubernetes-challenge-config-map   # name of the Config Map to reference
+                  key: USERNAME

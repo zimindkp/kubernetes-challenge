@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+# this is an abstraction layer that provides an accessible IP, like a load balancer
+metadata:
+    name: kube-challenge-service
+spec:
+    type: NodePort
+    selector:
+      app: kube-challenge       # ensure the label matches one used in Deployment - identifies which Pods this service will forward to
+    ports:
+      - port: 4000        # this port can be arbitrary
+        name: mainserver  # name is mandatory when you have more than 1 port defined for containers, but added it here for documentation
+        protocol: TCP
+        targetPort: 4000    #targetPort should match the Pod (containerPort) port in deployment
+        nodePort: 30125      # this is not required, but I wanted a static port
+
+# K8s will create Endpoint object that is the same name as the serviceName
+# It keeps track of which Pods are members/endpoints of this service
