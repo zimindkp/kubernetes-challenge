@@ -1,19 +1,24 @@
-# start minkube
+# start minikube
 minikube start
 
 # set minikube Docker daemon
-
+eval $(minikube -p minikube docker-env)
 
 echo Minikube has been deployed and docker environment set
 
 # create image
-if exist Dockerfile ( docker build -t kishan-kubechallenge-img . ) else (	echo "No Dockerfile found, image cannot be created" )
+if [ -f "Dockerfile" ]
+then
+ docker build -t kishan-kubechallenge-img .
+else
+  echo "No Dockerfile found, image cannot be created"
+fi
 
 # set default namespace
 kubectl config set-context --current --namespace=default
 
 # verify
-docker images | findstr "kishan-kubechallenge-img"
+docker images | grep "kishan-kubechallenge-img"
 
 echo Docker image has been created from provided Dockerfile
 
@@ -28,5 +33,10 @@ kubectl get service
 kubectl get all
 minikube ip
 
-# Get tunnel IP for minikube (on Windows, the Minikube IP does not work)
-start cmd /k minikube service --url kube-challenge-service
+#get port of the Service
+PORT=$(kubectl get service kube-challenge-service | awk 'FNR>1 {print $5}' | awk -F':|/' '{print $2}')
+
+ENDPOINT=$(minikube ip):${PORT}
+
+# test curl
+curl ${ENDPOINT} -w '\n'
