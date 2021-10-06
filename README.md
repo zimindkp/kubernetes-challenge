@@ -74,7 +74,7 @@ This will do all of the following:
 - If you want to delete the repository files to save space:
 ```bash
 cd kishankubechallenge
-git rm -r -q.
+git rm -r -q .
 cd .. 
 rm -rf kishankubechallenge
 ```
