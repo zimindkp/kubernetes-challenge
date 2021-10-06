@@ -1,0 +1,175 @@
+bash-3.2$ ./run.sh
+-e
+All programs installed
+
+All Done
+😄  minikube v1.23.2 on Darwin 11.6
+✨  Using the hyperkit driver based on existing profile
+👍  Starting control plane node minikube in cluster minikube
+🔄  Restarting existing hyperkit VM for "minikube" ...
+🐳  Preparing Kubernetes v1.22.2 on Docker 20.10.8 ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+
+❗  /usr/local/bin/kubectl is version 1.19.3, which may have incompatibilites with Kubernetes 1.22.2.
+    ▪ Want kubectl v1.22.2? Try 'minikube kubectl -- get pods -A'
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+Minikube has been deployed and docker environment set
+
+Sending build context to Docker daemon  138.8kB
+Step 1/6 : FROM node:6-alpine
+ ---> dfc29bfa7d41
+Step 2/6 : WORKDIR /src
+ ---> Using cache
+ ---> 6ae118121792
+Step 3/6 : COPY . .
+ ---> 4fd72f8802c4
+Step 4/6 : RUN npm install --quiet && npm test
+ ---> Running in 1991ee54253b
+npm WARN deprecated json3@3.3.2: Please use the native JSON object instead of JSON 3
+npm WARN deprecated mkdirp@0.5.1: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)
+kubernetes-challenge@1.0.0 /src
++-- express@4.17.1
+| +-- accepts@1.3.7
+| | +-- mime-types@2.1.33
+| | | `-- mime-db@1.50.0
+| | `-- negotiator@0.6.2
+| +-- array-flatten@1.1.1
+| +-- body-parser@1.19.0
+| | +-- bytes@3.1.0
+| | +-- http-errors@1.7.2
+| | | `-- toidentifier@1.0.0
+| | +-- iconv-lite@0.4.24
+| | | `-- safer-buffer@2.1.2
+| | `-- raw-body@2.4.0
+| +-- content-disposition@0.5.3
+| +-- content-type@1.0.4
+| +-- cookie@0.4.0
+| +-- cookie-signature@1.0.6
+| +-- debug@2.6.9
+| | `-- ms@2.0.0
+| +-- depd@1.1.2
+| +-- encodeurl@1.0.2
+| +-- escape-html@1.0.3
+| +-- etag@1.8.1
+| +-- finalhandler@1.1.2
+| | `-- unpipe@1.0.0
+| +-- fresh@0.5.2
+| +-- merge-descriptors@1.0.1
+| +-- methods@1.1.2
+| +-- on-finished@2.3.0
+| | `-- ee-first@1.1.1
+| +-- parseurl@1.3.3
+| +-- path-to-regexp@0.1.7
+| +-- proxy-addr@2.0.7
+| | +-- forwarded@0.2.0
+| | `-- ipaddr.js@1.9.1
+| +-- qs@6.7.0
+| +-- range-parser@1.2.1
+| +-- safe-buffer@5.1.2
+| +-- send@0.17.1
+| | +-- destroy@1.0.4
+| | +-- mime@1.6.0
+| | `-- ms@2.1.1
+| +-- serve-static@1.14.1
+| +-- setprototypeof@1.1.1
+| +-- statuses@1.5.0
+| +-- type-is@1.6.18
+| | `-- media-typer@0.3.0
+| +-- utils-merge@1.0.1
+| `-- vary@1.1.2
+`-- mocha@3.5.3
+  +-- browser-stdout@1.3.0
+  +-- commander@2.9.0
+  | `-- graceful-readlink@1.0.1
+  +-- debug@2.6.8
+  +-- diff@3.2.0
+  +-- escape-string-regexp@1.0.5
+  +-- glob@7.1.1
+  | +-- fs.realpath@1.0.0
+  | +-- inflight@1.0.6
+  | | `-- wrappy@1.0.2
+  | +-- inherits@2.0.3
+  | +-- minimatch@3.0.4
+  | | `-- brace-expansion@1.1.11
+  | |   +-- balanced-match@1.0.2
+  | |   `-- concat-map@0.0.1
+  | +-- once@1.4.0
+  | `-- path-is-absolute@1.0.1
+  +-- growl@1.9.2
+  +-- he@1.1.1
+  +-- json3@3.3.2
+  +-- lodash.create@3.1.1
+  | +-- lodash._baseassign@3.2.0
+  | | +-- lodash._basecopy@3.0.1
+  | | `-- lodash.keys@3.1.2
+  | |   +-- lodash._getnative@3.9.1
+  | |   +-- lodash.isarguments@3.1.0
+  | |   `-- lodash.isarray@3.0.4
+  | +-- lodash._basecreate@3.0.3
+  | `-- lodash._isiterateecall@3.0.9
+  +-- mkdirp@0.5.1
+  | `-- minimist@0.0.8
+  `-- supports-color@3.1.2
+    `-- has-flag@1.0.0
+
+npm WARN kubernetes-challenge@1.0.0 No repository field.
+
+> kubernetes-challenge@1.0.0 test /src
+> mocha ./test/unit
+
+
+
+  My sample test
+    ✓ should just pass
+
+
+  1 passing (8ms)
+
+Removing intermediate container 1991ee54253b
+ ---> 7eff9080c917
+Step 5/6 : EXPOSE 4000
+ ---> Running in 18fe20b1771d
+Removing intermediate container 18fe20b1771d
+ ---> 7ba7f6751e35
+Step 6/6 : CMD npm start
+ ---> Running in e841202254c7
+Removing intermediate container e841202254c7
+ ---> f3bc60e4b5d3
+Successfully built f3bc60e4b5d3
+Successfully tagged kishan-kubechallenge-img:latest
+Context "minikube" modified.
+kishan-kubechallenge-img                  latest     f3bc60e4b5d3   Less than a second ago   68MB
+
+Docker image has been created from provided Dockerfile
+
+
+Now applying all the YAML files for deployment
+
+ingress.networking.k8s.io/kubernetes-challenge-ingress unchanged
+service/kube-challenge-service unchanged
+configmap/kubernetes-challenge-config-map unchanged
+deployment.apps/kubechallenge-kishan unchanged
+NAME                     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kube-challenge-service   NodePort    10.106.104.31   <none>        4000:30125/TCP   18h
+kubernetes               ClusterIP   10.96.0.1       <none>        443/TCP          18h
+NAME                                        READY   STATUS    RESTARTS      AGE
+pod/kubechallenge-kishan-6746df754d-zzpcc   1/1     Running   3 (15m ago)   18h
+
+NAME                             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/kube-challenge-service   NodePort    10.106.104.31   <none>        4000:30125/TCP   18h
+service/kubernetes               ClusterIP   10.96.0.1       <none>        443/TCP          18h
+
+NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/kubechallenge-kishan   1/1     1            1           18h
+
+NAME                                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/kubechallenge-kishan-6746df754d   1         1         1       18h
+192.168.64.2
+
+Endpoint is 192.168.64.2:30125
+
+Hello Kishan Parekh!
+bash-3.2$
