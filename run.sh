@@ -1,10 +1,16 @@
+#!/bin/bash
+
+# call another program to check for pre-reqs (also included in repo)
+# verify pre-reqs
+sh ./prereq.sh
+
 # start minikube
 minikube start
 
 # set minikube Docker daemon
 eval $(minikube -p minikube docker-env)
 
-echo Minikube has been deployed and docker environment set
+echo -e "\nMinikube has been deployed and docker environment set\n"
 
 # create image
 if [ -f "Dockerfile" ]
@@ -20,9 +26,9 @@ kubectl config set-context --current --namespace=default
 # verify
 docker images | grep "kishan-kubechallenge-img"
 
-echo Docker image has been created from provided Dockerfile
+echo -e "\nDocker image has been created from provided Dockerfile\n"
 
-echo Now applying all the YAML files for deployment
+echo -e "\nNow applying all the YAML files for deployment\n"
 
 kubectl apply -f k8s/ingress.yaml
 kubectl apply -f k8s/service.yaml
@@ -38,5 +44,10 @@ PORT=$(kubectl get service kube-challenge-service | awk 'FNR>1 {print $5}' | awk
 
 ENDPOINT=$(minikube ip):${PORT}
 
+echo -e "\nEndpoint is ${ENDPOINT}\n"
+
 # test curl
 curl ${ENDPOINT} -w '\n'
+
+# open endpoint in browser
+open http://${ENDPOINT}
